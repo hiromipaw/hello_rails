@@ -1,13 +1,11 @@
 class SayController < ApplicationController
   def hello
-    @hello = Hash.new
+    @hello = Hello.new
     if params[:user]
-        @hello[:hello] = "#{params[:user]}!"
+      render :json => @hello.to_json(params[:user])
     else
-      @hello[:hello] = "Rails!"
+      render :json => @hello.to_json("Rails")
     end
-    respond_to do |format|
-      format.json { render :json => @hello }
-    end
+
   end
 end
